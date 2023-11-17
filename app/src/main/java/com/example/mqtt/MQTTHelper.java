@@ -54,7 +54,7 @@ public class MQTTHelper {
         mqttAndroidClient.setCallback(callback);
     }
 
-    private void connect(){
+    public void connect(){
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setAutomaticReconnect(true);
         mqttConnectOptions.setCleanSession(false);
@@ -88,7 +88,7 @@ public class MQTTHelper {
         }
     }
 
-    private void subscribeToTopic() {
+    public void subscribeToTopic() {
         for(int i = 0; i < arrayTopics.length; i++) {
             try {
                 mqttAndroidClient.subscribe(arrayTopics[i], 0, null, new IMqttActionListener() {

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,11 +57,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 Log.d("TEST", topic + "***" + message.toString());
+                swOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        String message;
+                        if (isChecked) {
+                            message = "1"; // ON
+                        } else {
+                            message = "0"; // OFF
+                        }
+
+                        mqttHelper.publishToTopic("diemcongbinh/feeds/bong-den", message);
+                    }
+                });
+
+
                 if (topic.equals("diemcongbinh/feeds/nhiet-do")) {
                     float nhietDoValue = Float.parseFloat(message.toString());
                     txtNhietDo.setText("T: " + nhietDoValue + "°C");
                     if (nhietDoValue < 20 || nhietDoValue > 50) {
                         txtNhietDo.setBackgroundColor(getResources().getColor(R.color.warning));
+                        txtDoam.setBackgroundColor(getResources().getColor(R.color.warning));
+                        String msg = "Cảnh báo nhiệt độ, nhiệt độ hiện tại " + nhietDoValue;
+                        //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setTitle("Temperature Alert")
+                                .setMessage(msg)
+                                .setPositiveButton("OK", null)
+                                .show();
                     } else
                         txtNhietDo.setBackgroundColor(getResources().getColor(R.color.normal));
                 } else if (topic.equals("diemcongbinh/feeds/do-am")) {
@@ -68,6 +92,13 @@ public class MainActivity extends AppCompatActivity {
                     txtDoam.setText("H: " + doAmValue + "%");
                     if (doAmValue > 90) {
                         txtDoam.setBackgroundColor(getResources().getColor(R.color.warning));
+                        String msg = "Cảnh báo độ ẩm, độ ẩm hiện tại " + doAmValue;
+                        //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setTitle("Humidity Alert")
+                                .setMessage(msg)
+                                .setPositiveButton("OK", null)
+                                .show();
                     } else
                         txtDoam.setBackgroundColor(getResources().getColor(R.color.normal));
                 } else if (topic.equals("diemcongbinh/feeds/khi-gas")) {
@@ -82,20 +113,27 @@ public class MainActivity extends AppCompatActivity {
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                         builder.setTitle("Gas Alert")
                                 .setMessage(msg)
-                                .setPositiveButton("OK", null) // You can add a listener here if needed
+                                .setPositiveButton("OK", null)
                                 .show();
                     } else
                         txtGas.setBackgroundColor(getResources().getColor(R.color.normal));
                 }else if (topic.equals("diemcongbinh/feeds/bong-den")) {
                     String buttonState = message.toString();
                     if ("0".equals(buttonState)) {
-                        // Adafruit sent "0", set SwitchCompat to OFF
+                        // OFF
                         swOnOff.setChecked(false);
+
                     } else if ("1".equals(buttonState)) {
-                        // Adafruit sent "1", set SwitchCompat to ON
+                        // ON
                         swOnOff.setChecked(true);
                     }
                 }
+
+                swOnOff.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    String msg = isChecked ? "1" : "0";
+                    mqttHelper.publishToTopic("diemcongbinh/feeds/bong-den", msg);
+                });
+
 
             }
 
