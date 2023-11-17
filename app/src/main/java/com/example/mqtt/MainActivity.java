@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                     } else
                         txtGas.setBackgroundColor(getResources().getColor(R.color.normal));
                 }else if (topic.equals("diemcongbinh/feeds/bong-den")) {
-                    // Assuming Adafruit sends "0" for OFF and "1" for ON
                     String buttonState = message.toString();
                     if ("0".equals(buttonState)) {
                         // Adafruit sent "0", set SwitchCompat to OFF
