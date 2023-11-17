@@ -1,0 +1,10 @@
+<resources>
+    <dimen name="_20sdp">20dp</dimen>
+    <dimen name="_30sdp">30dp</dimen>
+    <dimen name="_40sdp">40dp</dimen>
+    <dimen name="_50sdp">50dp</dimen>
+    <dimen name="_100sdp">100dp</dimen>
+    <dimen name="_120sdp">120dp</dimen>
+    <dimen name="_300sdp">300dp</dimen>
+    <dimen name="_20ssp">20sp</dimen>
+</resources>

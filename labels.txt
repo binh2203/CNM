@@ -1,0 +1,3 @@
+0 Không đeo khẩu trang
+1 Đeo khẩu trang
+2 Không có người
