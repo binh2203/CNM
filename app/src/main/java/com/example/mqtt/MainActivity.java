@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
             public void connectComplete(boolean reconnect, String serverURI) {
 
             }
-
             @Override
             public void connectionLost(Throwable cause) {
 
