@@ -129,11 +129,8 @@ public class MainActivity extends AppCompatActivity {
                 }else if (topic.equals("diemcongbinh/feeds/nhan-dang")) {
                     String nhanDien = message.toString();
                     if ("Có người".equals(nhanDien)) {
-
                         txtThongBao.setText(nhanDien);
-
                     } else if ("Không có người".equals(nhanDien)) {
-
                         txtThongBao.setText(nhanDien);
                     }
 
