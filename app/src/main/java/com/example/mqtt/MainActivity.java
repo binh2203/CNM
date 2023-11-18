@@ -126,7 +126,19 @@ public class MainActivity extends AppCompatActivity {
                         // ON
                         swOnOff.setChecked(true);
                     }
+                }else if (topic.equals("diemcongbinh/feeds/nhan-dang")) {
+                    String nhanDien = message.toString();
+                    if ("Có người".equals(nhanDien)) {
+
+                        txtThongBao.setText(nhanDien);
+
+                    } else if ("Không có người".equals(nhanDien)) {
+
+                        txtThongBao.setText(nhanDien);
+                    }
+
                 }
+
 
                 swOnOff.setOnCheckedChangeListener((buttonView, isChecked) -> {
                     String msg = isChecked ? "1" : "0";
