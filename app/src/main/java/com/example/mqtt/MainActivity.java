@@ -31,8 +31,22 @@ public class MainActivity extends AppCompatActivity {
         txtGas = findViewById(R.id.txtKhiGas);
         txtThongBao = findViewById(R.id.txtThongBao);
         swOnOff = findViewById(R.id.swOnOff);
+
         startMQTT();
 
+        swOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                String message;
+                if (isChecked) {
+                    message = "1"; // ON
+                } else {
+                    message = "0"; // OFF
+                }
+
+                mqttHelper.publishToTopic("diemcongbinh/feeds/bong-den", message);
+            }
+        });
     }
 
     public void startMQTT() {
@@ -56,19 +70,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 Log.d("TEST", topic + "***" + message.toString());
-                swOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        String message;
-                        if (isChecked) {
-                            message = "1"; // ON
-                        } else {
-                            message = "0"; // OFF
-                        }
 
-                        mqttHelper.publishToTopic("diemcongbinh/feeds/bong-den", message);
-                    }
-                });
 
 
                 if (topic.equals("diemcongbinh/feeds/nhiet-do")) {
