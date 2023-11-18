@@ -1,0 +1,2 @@
+0 Không có người
+1 Có người
