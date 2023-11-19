@@ -28,7 +28,7 @@
             android:gravity="center"
             android:text="T: 28°C"
             android:textColor="#BD83B8"
-            android:textSize="30dp"
+            android:textSize="28dp"
             android:textStyle="bold"></TextView>
 
         <TextView
@@ -38,7 +38,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="H: 60%"
-            android:textSize="30dp"
+            android:textSize="28dp"
             android:textStyle="bold"
             android:textColor="#BC82B7"
             android:drawableRight="@drawable/humidity_small"
@@ -61,7 +61,7 @@
             android:background="@drawable/rounded_background"
             android:drawableRight="@drawable/gas"
             android:gravity="center"
-            android:text="G: 245 ppb"
+            android:text="G: Không phát hiện"
             android:textColor="#BC82B7"
             android:textSize="30dp"
             android:textStyle="bold"></TextView>

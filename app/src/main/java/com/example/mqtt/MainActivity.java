@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             public void connectComplete(boolean reconnect, String serverURI) {
 
             }
+
             @Override
             public void connectionLost(Throwable cause) {
 
@@ -72,13 +73,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("TEST", topic + "***" + message.toString());
 
 
-
                 if (topic.equals("diemcongbinh/feeds/nhiet-do")) {
                     float nhietDoValue = Float.parseFloat(message.toString());
                     txtNhietDo.setText("T: " + nhietDoValue + "°C");
-                    if (nhietDoValue < 20 || nhietDoValue > 50) {
-                        txtNhietDo.setBackgroundColor(getResources().getColor(R.color.warning));
-                        txtDoam.setBackgroundColor(getResources().getColor(R.color.warning));
+                    if (nhietDoValue > 35) {
+                        txtNhietDo.setBackground(getResources().getDrawable(R.drawable.canhbao));
                         String msg = "Cảnh báo nhiệt độ, nhiệt độ hiện tại " + nhietDoValue;
                         //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -87,12 +86,12 @@ public class MainActivity extends AppCompatActivity {
                                 .setPositiveButton("OK", null)
                                 .show();
                     } else
-                        txtNhietDo.setBackgroundColor(getResources().getColor(R.color.normal));
+                        txtNhietDo.setBackground(getResources().getDrawable(R.drawable.rounded_background));
                 } else if (topic.equals("diemcongbinh/feeds/do-am")) {
                     float doAmValue = Float.parseFloat(message.toString());
                     txtDoam.setText("H: " + doAmValue + "%");
                     if (doAmValue > 90) {
-                        txtDoam.setBackgroundColor(getResources().getColor(R.color.warning));
+                        txtDoam.setBackground(getResources().getDrawable(R.drawable.canhbao));
                         String msg = "Cảnh báo độ ẩm, độ ẩm hiện tại " + doAmValue;
                         //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -101,24 +100,28 @@ public class MainActivity extends AppCompatActivity {
                                 .setPositiveButton("OK", null)
                                 .show();
                     } else
-                        txtDoam.setBackgroundColor(getResources().getColor(R.color.normal));
+                        txtDoam.setBackground(getResources().getDrawable(R.drawable.rounded_background));
                 } else if (topic.equals("diemcongbinh/feeds/khi-gas")) {
                     int khiGasValue = Integer.parseInt(message.toString());
 
-                    txtGas.setText("G: " + khiGasValue + "ppb");
 
-                    if (khiGasValue > 512) {
-                        txtGas.setBackgroundColor(getResources().getColor(R.color.warning));
-                        String msg = "Cảnh báo khí Gas, khí gas hiện tại " + khiGasValue;
+
+                    if (khiGasValue == 1) {
+                        txtGas.setText("G: rò rỉ khí gas");
+
+                        txtGas.setBackground(getResources().getDrawable(R.drawable.canhbao));
+                        String msg = "Cảnh báo có khí gas đang rò rỉ, nguy cơ cháy nổ cao!!" + khiGasValue;
                         //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                         builder.setTitle("Gas Alert")
                                 .setMessage(msg)
                                 .setPositiveButton("OK", null)
                                 .show();
-                    } else
-                        txtGas.setBackgroundColor(getResources().getColor(R.color.normal));
-                }else if (topic.equals("diemcongbinh/feeds/bong-den")) {
+                    } else{
+                        txtGas.setText("G: Không phát hiện");
+                        txtGas.setBackground(getResources().getDrawable(R.drawable.rounded_background));
+                    }
+                } else if (topic.equals("diemcongbinh/feeds/bong-den")) {
                     String buttonState = message.toString();
                     if ("0".equals(buttonState)) {
                         // OFF
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                         // ON
                         swOnOff.setChecked(true);
                     }
-                }else if (topic.equals("diemcongbinh/feeds/nhan-dang")) {
+                } else if (topic.equals("diemcongbinh/feeds/nhan-dang")) {
                     String nhanDien = message.toString();
                     if ("Có người".equals(nhanDien)) {
                         txtThongBao.setText(nhanDien);
