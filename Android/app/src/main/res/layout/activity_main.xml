@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#5b9bd5">
+
+    android:background="@drawable/ic_background_night">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -13,31 +14,34 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="20"
+        android:layout_weight="10"
         android:orientation="horizontal">
+
         <TextView
             android:id="@+id/txtNhietDo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="#ed7d31"
-            android:text="T: 28°C"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            android:textColor="#000000"
+            android:background="@drawable/rounded_background"
+            android:drawableRight="@drawable/temperature_small"
             android:gravity="center"
-            android:layout_margin="10dp">
-        </TextView>
+            android:text="T: 28°C"
+            android:textColor="#BD83B8"
+            android:textSize="28dp"
+            android:textStyle="bold"></TextView>
+
         <TextView
+            android:background="@drawable/rounded_background"
             android:id="@+id/txtDoAm"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#ed7d31"
             android:text="H: 60%"
-            android:textSize="30dp"
+            android:textSize="28dp"
             android:textStyle="bold"
-            android:textColor="#000000"
+            android:textColor="#BC82B7"
+            android:drawableRight="@drawable/humidity_small"
             android:gravity="center"
             android:layout_margin="10dp">
         </TextView>
@@ -46,7 +50,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="20">
+        android:layout_weight="10">
 
         <TextView
             android:id="@+id/txtKhiGas"
@@ -54,13 +58,13 @@
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="#ed7d31"
+            android:background="@drawable/rounded_background"
+            android:drawableRight="@drawable/gas"
             android:gravity="center"
-            android:text="G: 245 ppb"
-            android:textColor="#000000"
+            android:text="G: Không phát hiện"
+            android:textColor="#BC82B7"
             android:textSize="30dp"
-            android:textStyle="bold">
-        </TextView>
+            android:textStyle="bold"></TextView>
     </LinearLayout>
 
     <LinearLayout
@@ -69,33 +73,37 @@
         android:layout_weight="20">
 
         <androidx.appcompat.widget.SwitchCompat
+
             android:id="@+id/swOnOff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:textSize="20sp"
+            android:textOn="Bật"
+            android:textOff="Tắt"
             android:thumb="@drawable/custom_thumb"
             app:showText="true"
             app:track="@drawable/custom_track"
-            app:thumbTint="#c55a11"/>
+            app:thumbTint="#473E66"
+            app:switchTextAppearance="@style/BrandedSwitch.text"/>
 
 
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="20">
+        android:layout_weight="15">
         <TextView
+            android:background="@drawable/rounded_background"
             android:id="@+id/txtThongBao"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Nhận dạng AI"
-            android:textSize="30dp"
+            android:text="Nhận dạng"
+            android:textSize="40dp"
             android:textStyle="bold"
-            android:textColor="#ffffff"
+            android:textColor="#BB81B6"
             android:gravity="center"
             android:layout_margin="20dp">
         </TextView>

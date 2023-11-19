@@ -16,11 +16,11 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 public class MQTTHelper {
     public MqttAndroidClient mqttAndroidClient;
 
-    public final String[] arrayTopics = {"diemcongbinh/feeds/nhiet-do", "diemcongbinh/feeds/do-am", "diemcongbinh/feeds/khi-gas","diemcongbinh/feeds/bong-den"};
+    public final String[] arrayTopics = {"diemcongbinh/feeds/nhiet-do", "diemcongbinh/feeds/do-am", "diemcongbinh/feeds/khi-gas","diemcongbinh/feeds/bong-den", "diemcongbinh/feeds/nhan-dang"};
 
     final String clientId = "12345678";
     final String username = "diemcongbinh";
-    final String password = "aio_WYOi77YbffVRne2KKQTFTNxwaOBD";
+    final String password = "aio_ItNh24gR0TeLGyhFiWaUvFzu1QVi";
 
     final String serverUri = "tcp://io.adafruit.com:1883";
 
@@ -54,7 +54,7 @@ public class MQTTHelper {
         mqttAndroidClient.setCallback(callback);
     }
 
-    private void connect(){
+    public void connect(){
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setAutomaticReconnect(true);
         mqttConnectOptions.setCleanSession(false);
@@ -88,7 +88,7 @@ public class MQTTHelper {
         }
     }
 
-    private void subscribeToTopic() {
+    public void subscribeToTopic() {
         for(int i = 0; i < arrayTopics.length; i++) {
             try {
                 mqttAndroidClient.subscribe(arrayTopics[i], 0, null, new IMqttActionListener() {
